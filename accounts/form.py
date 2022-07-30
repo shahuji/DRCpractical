@@ -14,3 +14,11 @@ class RegistrationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ("name", "username", "email",)
+
+
+class ImageUploadForm(forms.Form):
+    image = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+
+    class Meta:
+        model = Images
+        fields = ('image')
