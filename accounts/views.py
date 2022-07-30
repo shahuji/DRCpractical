@@ -53,19 +53,6 @@ class MyLogout(LogoutView):
         return super().dispatch(request, *args, **kwargs)
 
 
-@login_required(login_url='accounts:login')
-def viewUser(request):
-    """Viewing perticular user details"""
-    # Images.objects.get(user=pk) is not None
-    pk = request.user.pk
-    if Images.objects.filter(user_id=pk).exists():
-        userImg = Images.objects.get(user_id=pk)
-    else:
-        userImg = "images/pro.png"
-    context = {"data": userImg}
-    return render(request, 'accounts/view.html', context)
-
-
 class UserView(View):
 
     def get(self, request):
@@ -88,10 +75,17 @@ class UserView(View):
 
     def post(self, request):
         if request.method == 'POST':
-            form = ImageUploadForm(request.POST, request.FILES)
-            if form.is_valid():
-                image = Images(**form.cleaned_data, user=request.user)
-                image.save()
+            # form = ImageUploadForm(request.POST, request.FILES)
+            # if form.is_valid():
+            #     image = Images(**form.cleaned_data, user=request.user)
+            #     image.save()
+            #     return JsonResponse({'data': 'Data uploaded'})
+            # form = ImageUploadForm(request.POST, request.FILES.getlist('image'))
+            images = request.FILES.getlist('image')
+            if images:
+                for _image in images:
+                    image = Images(image=_image, user=request.user)
+                    image.save()
                 return JsonResponse({'data': 'Data uploaded'})
 
             else:
