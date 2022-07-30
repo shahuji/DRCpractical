@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'accounts.apps.AccountsConfig',
+    'crispy_forms',
+    'tz_detect',
+    'widget_tweaks',
 ]
 
 # CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -56,7 +59,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'tz_detect.middleware.TimezoneMiddleware',
 ]
+
+if django.VERSION < (1, 10):
+    MIDDLEWARE_CLASSES += (
+        'tz_detect.middleware.TimezoneMiddleware',
+    )
 
 ROOT_URLCONF = 'practical.urls'
 
@@ -91,6 +100,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
 
 
 # Password validation
@@ -138,6 +148,13 @@ REST_FRAMEWORK = {
     ]
 }
 
+# Together MemoryFileUploadHandler and TemporaryFileUploadHandler
+# Provide Django’s default file upload behavior of reading
+# small files into memory and large ones onto disk.
+FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler"
+]
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -154,3 +171,9 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+# These countries will be prioritized in the search
+# for a matching timezone. Consider putting your
+# app's most popular countries first.
+# Defaults to the top Internet using countries.
+TZ_DETECT_COUNTRIES = ('CN', 'US', 'IN', 'JP', 'BR', 'RU', 'DE', 'FR', 'GB')
