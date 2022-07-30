@@ -1,0 +1,20 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    <title>:: Login ::</title>
+{% endblock %}
+{% block content %}
+<div class="col-md-6 offset-md-3">
+    <hr class="mb-5">
+
+
+    <div class="card card-outline-secondary">
+        <div class="card-header">
+            <h3 class="mb-0">Logged out</h3>
+        </div>
+        <div class="card-body">
+            <a href="{% url 'accounts:login'%}">Click here to login again.</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

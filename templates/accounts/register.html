@@ -1,0 +1,41 @@
+{% extends 'accounts/base.html' %}
+{% block title %}
+    <title>:: Login ::</title>
+{% endblock %}
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+    <hr class="mb-5">
+
+    <div class="card card-outline-secondary">
+        <div class="card-header">
+            <h3 class="mb-0">New Registeration</h3>
+        </div>
+        <div class="card-body">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                {% include 'accounts/includes/baseform.html' with form=form %}
+                <div class="form-group">
+                    <label class="form-check-label">
+                        <input required="required" type="checkbox">
+                            I accept the
+                        <a href="#">
+                            Terms of Use
+                        </a> &amp;
+                        <a href="#">
+                            Privacy Policy
+                        </a>
+                    </label>
+                </div>
+                <button class="btn btn-primary btn-lg" type="submit">Sign Up
+                </button>
+            </form>
+            <div class="hint-text">Already have an account?
+                <a href="{% url 'accounts:login' %}">Login here</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
