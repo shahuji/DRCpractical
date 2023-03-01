@@ -10,6 +10,6 @@
 
 ~ Vishal Shahu
 
-~ vshahu47@gmail.com
+~ [Email](vshahu47@gmail.com)
 
 ~ linkedin.com/in/shahuji/
