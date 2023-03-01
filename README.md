@@ -12,4 +12,4 @@
 
 ~ [Email](vshahu47@gmail.com)
 
-~ linkedin.com/in/shahuji/
+~ [GIT](linkedin.com/in/shahuji/)
